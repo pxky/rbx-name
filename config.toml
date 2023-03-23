@@ -1,0 +1,18 @@
+[username]
+length = 6
+# number of characters to use in generation
+
+prefix = ""
+# string to be added to front of username
+
+suffix = ""
+# string to be added to end of username
+
+characters = ["a", "b", "c", "d", "e", "f", "g", "h", "j", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+# !! put some predefined arrarys here poky !!
+# characters = a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z,  , _
+# characters to be randomly picked from
+
+[misc]
+time_between_checks = 0.1
+# time between api requests in seconds
