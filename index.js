@@ -8,8 +8,7 @@ const main = async () => {
     let username = generate()
     let response = await validate(username)
     if (response._body.code == 0) {
-        fs.writeFile('./output.txt', `${username}\n`, {encoding: "utf8", flag: "a"}, ()=> 
-        {
+        fs.writeFile('./output.txt', `${username}\n`, {encoding: "utf8", flag: "a"}, ()=> {
             pprint(`generated: ${username}`, 'vice', true)
         })
     }
