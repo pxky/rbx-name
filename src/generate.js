@@ -2,10 +2,12 @@ const config = require('./config')
 
 const username = () => {
     let name = ''
+    let prefix = config.username.prefix
+    let suffix = config.username.suffix
     // pick random characters until username length fulfilled
-    while (config.username.prefix.length + name.length + config.username.suffix.length < config.username.length) {
+    while (prefix.length + name.length + suffix.length < config.username.length) {
         let character = config.username.characters[Math.floor(Math.random() * config.username.characters.length)]
-        if (name.length + character.length <= config.username.length) {
+        if (prefix.length + name.length + character.length + suffix.length <= config.username.length) {
             name += character
         }
     }

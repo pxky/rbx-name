@@ -1,14 +1,14 @@
 [username]
-length = 6
+length = 5
 # number of characters to use in generation
 
-prefix = ""
+prefix = "den"
 # string to be added to front of username
 
 suffix = ""
 # string to be added to end of username
 
-characters = ["a", "b", "c", "d", "e", "f", "g", "h", "j", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+characters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 # characters to be randomly picked from
 
 [misc]
