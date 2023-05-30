@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "chalk": "^4.1.2",
     "superagent": "^8.0.9",
     "toml": "^3.0.0"
   }

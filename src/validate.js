@@ -1,20 +1,26 @@
 const fs = require('fs')
 const superagent = require('superagent')
+const chalk = require('chalk')
+
+function logName(name, taken, typeOfName) {
+    typeOfName = typeOfName == 1 ? typeOfName = 'user' : typeOfName = 'group'
+    taken == false ? fs.writeFile('../valid.txt', `${name}\n`, {encoding: "utf8", flag: "a"}, () => { console.log(chalk.green(`✅ ${typeOfName}: ${name}`))}) : console.log(chalk.red(`🟥 ${typeOfName}: ${name}`))
+}
 
 const userName = async (name) => {
     let url = `https://auth.roblox.com/v2/usernames/validate?request.username=${name}&request.birthday=1-1-2000&request.context=Signup`
     let request = await superagent.get(url)
 
-    request._body.code == 0 ? fs.writeFile('../valid.txt', `${name}\n`, {encoding: "utf8", flag: "a"}, () => { console.log(`valid username: ${name}`)}) : console.log(`invalid user: ${name}`)
+    request._body.code == 0 ? logName(name, false, 1) : logName(name, true, 1)
 }
 
 const groupName = async (name) => {
     let url = `https://groups.roblox.com/v1/groups/search/lookup?groupName=${name}`
     let request = await superagent.get(url)
 
-    // checks the first result only. eg: https://groups.roblox.com/v1/groups/search/lookup?groupName=test
+    // checks the first result on search page only. cannot detect if username is appropriate or not
     // admire my ternary hell >:)
-    request._body.data[0] ? request._body.data[0].name.toLowerCase() == name ? console.log(`taken group name: ${name}`): console.log(`available group name (surprisingly): ${name}`) : console.log(`available group name: ${name}`)
+    request._body.data[0] ? request._body.data[0].name.toLowerCase() == name ? logName(name, true, 2): logName(name, false, 2) : logName(name, false, 2)
 }
 
 module.exports = { userName, groupName }
