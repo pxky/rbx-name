@@ -1,8 +1,8 @@
 [username]
-length = 5
+length = 6
 # number of characters to use in generation
 
-prefix = "den"
+prefix = ""
 # string to be added to front of username
 
 suffix = ""
@@ -12,5 +12,13 @@ characters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q
 # characters to be randomly picked from
 
 [misc]
+mode = 2
+# 1 = generate random using settings above
+# 2 = try every line of tocheck.txt as a name
+
+type = 2
+# 1 = player usernames
+# 2 = group names
+
 time_between_checks = 0.1
 # time between api requests in seconds

@@ -1,19 +1,32 @@
 const fs = require('fs')
-const pprint = require('poke-print')
 const config = require('./src/config')
 const generate = require('./src/generate')
 const validate = require('./src/validate')
+const globals = require('./src/globals')
+const tocheck = fs.readFileSync('./tocheck.txt', 'utf8').split(/\r\n/)
+
+
+const checkUsername = async (username) => {
+    config.misc.type == 1 ? validate.userName(encodeURI(username)) : validate.groupName(encodeURI(username))
+}
 
 const main = async () => {
-    let username = generate()
-    pprint(`generated: ${username}`, 'instagram', true)
-    let response = await validate(username)
-    if (response._body.code == 0) {
-        fs.writeFile('./output.txt', `${username}\n`, {encoding: "utf8", flag: "a"}, ()=> {
-            pprint(`valid username: ${username}`, 'summer', true)
-        })
+    if (config.misc.mode == 1) {
+        setInterval(() => {
+            let username = generate()
+            console.log(`checking: ${username}`)
+            checkUsername(username)
+        }, config.misc.time_between_checks * 1000)
+    }
+    else if (config.misc.mode == 2) {
+        for (let i in tocheck) {
+            let username = tocheck[i]
+            console.log(`checking: ${username}`)
+            checkUsername(username)
+            await globals.delay(config.misc.time_between_checks * 1000)
+        }
     }
 }
 
-pprint('!! poke-gen started !!', 'red.underline.bold')
-setInterval(() => {main()}, config.misc.time_between_checks * 1000)
+console.log('!! poke-gen started !!')
+main()
