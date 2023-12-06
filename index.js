@@ -4,14 +4,15 @@ const generate = require('./src/generate')
 const validate = require('./src/validate')
 const globals = require('./src/globals')
 const chalk = require('chalk')
-const tocheck = fs.readFileSync('./tocheck.txt', 'utf8').split(/\r\n/)
-
+const tocheck = fs.existsSync('./tocheck.txt') ? fs.readFileSync('./tocheck.txt', 'utf8').split(/\r\n/) : null
 
 const checkUsername = async (username) => {
     config.misc.type == 1 ? validate.userName(encodeURI(username)) : validate.groupName(encodeURI(username))
 }
 
 const main = async () => {
+    console.log(chalk.bgMagenta.white.bold.italic.underline('!! poke-gen started !!'))
+    console.log(chalk.yellow.underline.bold("gen mode: " + (config.misc.mode == 1 ? "random" : "predefined")))
     if (config.misc.mode == 1) {
         setInterval(() => {
             let username = generate()
@@ -29,5 +30,4 @@ const main = async () => {
     }
 }
 
-console.log('!! poke-gen started !!')
 main()

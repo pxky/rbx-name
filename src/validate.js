@@ -4,7 +4,7 @@ const chalk = require('chalk')
 
 function logName(name, taken, typeOfName) {
     typeOfName = typeOfName == 1 ? typeOfName = 'user' : typeOfName = 'group'
-    taken == false ? fs.writeFile('../valid.txt', `${name}\n`, {encoding: "utf8", flag: "a"}, () => { console.log(chalk.green(`✅ ${typeOfName}: ${name}`))}) : console.log(chalk.red(`🟥 ${typeOfName}: ${name}`))
+    taken == false ? fs.writeFile('./valid.txt', `${name}\n`, {encoding: "utf8", flag: "a"}, () => { console.log(chalk.green(`${typeOfName}: "${name}" AVAILABLE`))}) : console.log(chalk.red(`${typeOfName}: "${name}" TAKEN`))
 }
 
 const userName = async (name) => {
@@ -18,8 +18,7 @@ const groupName = async (name) => {
     let url = `https://groups.roblox.com/v1/groups/search/lookup?groupName=${name}`
     let request = await superagent.get(url)
 
-    // checks the first result on search page only. cannot detect if username is appropriate or not
-    // admire my ternary hell >:)
+    // checks the first result on search page only. does not know if username is appropriate or not
     request._body.data[0] ? request._body.data[0].name.toLowerCase() == name ? logName(name, true, 2): logName(name, false, 2) : logName(name, false, 2)
 }
 

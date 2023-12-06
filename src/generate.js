@@ -1,11 +1,16 @@
 const config = require('./config')
 
+const smallestCharLength = config.username.characters[0].length
+
 const username = () => {
     let name = ''
     let prefix = config.username.prefix
     let suffix = config.username.suffix
-    // pick random characters until username length fulfilled
+    
     while (prefix.length + name.length + suffix.length < config.username.length) {
+        if (name.length + smallestCharLength > config.username.length) {
+            return username()
+        }
         let character = config.username.characters[Math.floor(Math.random() * config.username.characters.length)]
         if (prefix.length + name.length + character.length + suffix.length <= config.username.length) {
             name += character
@@ -15,7 +20,6 @@ const username = () => {
 
     // cant have a _ at start or end of username
     if (name.charAt(0) === '_' || name.charAt(name.length - 1) === '_') {
-        // generate a new username
         return username()
     }
     // cant have more than 1 _ in a username
