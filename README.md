@@ -4,4 +4,4 @@
 3. extract the files and open a terminal in said files location  
 4. run "npm install" once  
 5. run "node ." to start the bot whenever !!  
-#### edit "config.toml" file to change settings  
+- edit "config.toml" file to change settings  

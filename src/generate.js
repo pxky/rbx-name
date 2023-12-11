@@ -1,6 +1,12 @@
 const config = require('./config')
 
-const smallestCharLength = config.username.characters[0].length
+let smallestCharLength = config.username.characters[0].length
+
+for (let i in config.username.characters) {
+	if (config.username.characters[i].length < smallestCharLength) {
+		smallestCharLength = config.username.characters[i].length
+	}
+}
 
 const username = () => {
     let name = ''
@@ -8,9 +14,12 @@ const username = () => {
     let suffix = config.username.suffix
     
     while (prefix.length + name.length + suffix.length < config.username.length) {
-        if (name.length + smallestCharLength > config.username.length) {
+		if (name.length + smallestCharLength > config.username.length) {
             return username()
         }
+		if (prefix.length + name.length + smallestCharLength + suffix.length > config.username.length) {
+			return username()
+		}
         let character = config.username.characters[Math.floor(Math.random() * config.username.characters.length)]
         if (prefix.length + name.length + character.length + suffix.length <= config.username.length) {
             name += character

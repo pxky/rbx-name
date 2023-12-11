@@ -20,5 +20,5 @@ type = 1
 # 1 = player usernames
 # 2 = group names
 
-time_between_checks = 0.1
+time_between_checks = 0.09
 # time between api requests in seconds
