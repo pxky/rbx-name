@@ -1,4 +1,9 @@
 {
+  "name": "rbx-name",
+  "version": "1.0.0",
+  "description": "Generates & validates untaken usernames for roblox.",
+  "main": "index.js",
+  "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",
     "superagent": "^8.0.9",
